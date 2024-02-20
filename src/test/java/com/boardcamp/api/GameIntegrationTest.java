@@ -13,30 +13,30 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.boardcamp.api.dtos.CustomerDTO;
-import com.boardcamp.api.models.CustomerModel;
-import com.boardcamp.api.repositories.CustomerRepository;
+import com.boardcamp.api.dtos.GameDTO;
+import com.boardcamp.api.models.GameModel;
+import com.boardcamp.api.repositories.GameRepository;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class CustomerIntegrationTest {
+public class GameIntegrationTest {
     
     @Autowired private TestRestTemplate restTemplate;
-    @Autowired private CustomerRepository customerRepository;
+    @Autowired private GameRepository gameRepository;
 
     @BeforeEach
     @AfterEach
-    void cleanUpDb() {
-        customerRepository.deleteAll();
+    void cleanUpDb(){
+        gameRepository.deleteAll();
     }
 
     @Test
-	void givenValidCustomer_whenCreatingCustomer_thenCreateCustomer(){
-        CustomerDTO customer = new CustomerDTO("nome", "12345678901");
-        HttpEntity<CustomerDTO> body = new HttpEntity<>(customer);
+	void givenValidGame_whenCreatingGame_thenCreateGame(){
+        GameDTO game = new GameDTO("name", "image", 3, 1500);
+        HttpEntity<GameDTO> body = new HttpEntity<>(game);
 
-        ResponseEntity<CustomerModel> response = restTemplate.exchange("/customers", HttpMethod.POST, body, CustomerModel.class);
+        ResponseEntity<GameModel> response = restTemplate.exchange("/games", HttpMethod.POST, body, GameModel.class);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals(1, customerRepository.count());
+        assertEquals(1, gameRepository.count());
     }
 }
