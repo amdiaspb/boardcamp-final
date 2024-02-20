@@ -16,16 +16,19 @@ import org.springframework.http.ResponseEntity;
 import com.boardcamp.api.dtos.CustomerDTO;
 import com.boardcamp.api.models.CustomerModel;
 import com.boardcamp.api.repositories.CustomerRepository;
+import com.boardcamp.api.repositories.RentalRepository;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CustomerIntegrationTest {
     
     @Autowired private TestRestTemplate restTemplate;
+    @Autowired private RentalRepository rentalRepository;
     @Autowired private CustomerRepository customerRepository;
 
     @BeforeEach
     @AfterEach
     void cleanUpDb() {
+        rentalRepository.deleteAll();
         customerRepository.deleteAll();
     }
 
