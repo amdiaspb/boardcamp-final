@@ -9,6 +9,6 @@ import com.boardcamp.api.models.RentalModel;
 
 @Repository
 public interface RentalRepository extends JpaRepository<RentalModel,Long> {
-    @Query(value = "SELECT COUNT(rentals.id) FROM rentals WHERE game_id = :gameId GROUP BY game_id;", nativeQuery = true)
+    @Query(value = "SELECT COUNT(rentals.id) FROM rentals WHERE game_id = :gameId AND return_date IS NULL GROUP BY game_id;", nativeQuery = true)
     Integer rentalCountByGameId(@Param("gameId") Long gameId);
 }
