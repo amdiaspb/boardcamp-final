@@ -32,4 +32,20 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
     }
 
+    /* RENTALS ================================================================================= */
+
+    @ExceptionHandler({ RentalNotFoundException.class })
+    public ResponseEntity<Object> handleRentalNotFound(RentalNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
+    }
+
+    @ExceptionHandler({ RentalLimitUnprocessableEntityException.class })
+    public ResponseEntity<Object> handleRentalLimitUnprocessableEntity(RentalLimitUnprocessableEntityException exception) {
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(exception.getMessage());
+    }
+
+    @ExceptionHandler({ RentalReturnedUnprocessableEntityException.class })
+    public ResponseEntity<Object> handleRentalReturnedUnprocessableEntity(RentalReturnedUnprocessableEntityException exception) {
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(exception.getMessage());
+    }
 }
