@@ -43,6 +43,6 @@ public class RentalController {
     @PutMapping("/{id}/return")
     public ResponseEntity<RentalModel> updateUser(@PathVariable Long id) {
         RentalModel rental = rentalService.update(id);
-        return ResponseEntity.status(HttpStatus.CREATED).body(rental);
+        return ResponseEntity.status(HttpStatus.OK).body(rental);
     }
 }
